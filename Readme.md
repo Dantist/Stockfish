@@ -4,11 +4,11 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/official-stockfish/Stockfish?branch=master&svg=true)](https://ci.appveyor.com/project/mcostalba/stockfish/branch/master)
 
 [Stockfish](https://stockfishchess.org) is a free, powerful UCI chess engine
-derived from Glaurung 2.1. It is not a complete chess program and requires a
-UCI-compatible GUI (e.g. XBoard with PolyGlot, Scid, Cute Chess, eboard, Arena,
-Sigma Chess, Shredder, Chess Partner or Fritz) in order to be used comfortably.
-Read the documentation for your GUI of choice for information about how to use
-Stockfish with it.
+derived from Glaurung 2.1. Stockfish is not a complete chess program and requires a
+UCI-compatible graphical user interface (GUI) (e.g. XBoard with PolyGlot, Scid,
+Cute Chess, eboard, Arena, Sigma Chess, Shredder, Chess Partner or Fritz) in order
+to be used comfortably. Read the documentation for your GUI of choice for information
+about how to use Stockfish with it.
 
 
 ## Files
@@ -27,25 +27,12 @@ This distribution of Stockfish consists of the following files:
 
 Currently, Stockfish has the following UCI options:
 
-  * #### Debug Log File
-    Write all communication to and from the engine into a text file.
-
-  * #### Contempt
-    A positive value for contempt favors middle game positions and avoids draws.
-
-  * #### Analysis Contempt
-    By default, contempt is set to prefer the side to move. Set this option to "White"
-    or "Black" to analyse with contempt for that side, or "Off" to disable contempt.
-
   * #### Threads
     The number of CPU threads used for searching a position. For best performance, set
     this equal to the number of CPU cores available.
 
   * #### Hash
     The size of the hash table in MB. It is recommended to set Hash after setting Threads.
-
-  * #### Clear Hash
-    Clear the hash table.
 
   * #### Ponder
     Let Stockfish ponder its next move while the opponent is thinking.
@@ -70,18 +57,6 @@ Currently, Stockfish has the following UCI options:
     If enabled, show approximate WDL statistics as part of the engine output.
     These WDL numbers model expected game outcomes for a given evaluation and
     game ply for engine self-play at fishtest LTC conditions (60+0.6s per game).
-
-  * #### Move Overhead
-    Assume a time delay of x ms due to network and GUI overheads. This is useful to
-    avoid losses on time in those cases.
-
-  * #### Slow Mover
-    Lower values will make Stockfish take less time in games, higher values will
-    make it think longer.
-
-  * #### nodestime
-    Tells the engine to use nodes searched instead of wall time to account for
-    elapsed time. Useful for engine testing.
 
   * #### UCI_Chess960
     An option handled by your GUI. If true, Stockfish will play Chess960.
@@ -114,6 +89,30 @@ Currently, Stockfish has the following UCI options:
     Limit Syzygy tablebase probing to positions with at most this many pieces left
     (including kings and pawns).
 
+  * #### Contempt
+    A positive value for contempt favors middle game positions and avoids draws.
+
+  * #### Analysis Contempt
+    By default, contempt is set to prefer the side to move. Set this option to "White"
+    or "Black" to analyse with contempt for that side, or "Off" to disable contempt.
+
+  * #### Move Overhead
+    Assume a time delay of x ms due to network and GUI overheads. This is useful to
+    avoid losses on time in those cases.
+
+  * #### Slow Mover
+    Lower values will make Stockfish take less time in games, higher values will
+    make it think longer.
+
+  * #### nodestime
+    Tells the engine to use nodes searched instead of wall time to account for
+    elapsed time. Useful for engine testing.
+
+  * #### Clear Hash
+    Clear the hash table.
+
+  * #### Debug Log File
+    Write all communication to and from the engine into a text file.
 
 ## What to expect from Syzygybases?
 
@@ -190,8 +189,7 @@ compiler you used to create your executable. These informations can
 be found by typing the following commands in a console:
 
 ```
-    ./stockfish
-    compiler
+    ./stockfish compiler
 ```
 
 ## Understanding the code base and participating in the project
