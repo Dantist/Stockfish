@@ -301,9 +301,6 @@ ifeq ($(COMP),gcc)
 	ifneq ($(KERNEL),Darwin)
 	   LDFLAGS += -Wl,--no-as-needed
 	endif
-
-	gccversion = $(shell $(CXX) --version)
-	gccisclang = $(findstring clang,$(gccversion))
 endif
 
 ifeq ($(COMP),mingw)
@@ -375,6 +372,7 @@ endif
 ifeq ($(KERNEL),Darwin)
 	CXXFLAGS += -arch $(arch) -mmacosx-version-min=10.13
 	LDFLAGS += -arch $(arch) -mmacosx-version-min=10.13
+	XCRUN = xcrun
 endif
 
 # To cross-compile for Android, NDK version r21 or later is recommended.
@@ -404,6 +402,16 @@ endif
 ### Allow overwriting CXX from command line
 ifdef COMPCXX
 	CXX=$(COMPCXX)
+endif
+
+### Sometimes gcc is really clang
+ifeq ($(COMP),gcc)
+	gccversion = $(shell $(CXX) --version)
+	gccisclang = $(findstring clang,$(gccversion))
+	ifneq ($(gccisclang),)
+		profile_make = clang-profile-make
+		profile_use = clang-profile-use
+	endif
 endif
 
 ### On mingw use Windows threads, otherwise POSIX
@@ -772,7 +780,7 @@ clang-profile-make:
 	all
 
 clang-profile-use:
-	llvm-profdata merge -output=stockfish.profdata *.profraw
+	$(XCRUN) llvm-profdata merge -output=stockfish.profdata *.profraw
 	$(MAKE) ARCH=$(ARCH) COMP=$(COMP) \
 	EXTRACXXFLAGS='-fprofile-instr-use=stockfish.profdata' \
 	EXTRALDFLAGS='-fprofile-use ' \
