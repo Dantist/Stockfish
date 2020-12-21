@@ -918,11 +918,7 @@ namespace {
         // In every other case use scale factor based on
         // the number of pawns of the strong side reduced if pawns are on a single flank.
         else
-            sf = std::min(sf, 36 + 7 * pos.count<PAWN>(strongSide)) - 4 * !pawnsOnBothFlanks;
-
-      
-        // Reduce scale factor in case of pawns being on a single flank
-        sf -= 4 * !pawnsOnBothFlanks;
+            sf = std::min(sf, 36 + 7 * pos.count<PAWN>(strongSide));
     }
 
     // Interpolate between the middlegame and (scaled by 'sf') endgame score
