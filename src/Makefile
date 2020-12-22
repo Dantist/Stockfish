@@ -613,8 +613,10 @@ ifeq ($(debug), no)
 # So, only enable it for a cross from Linux by default.
 	else ifeq ($(comp),mingw)
 	ifeq ($(KERNEL),Linux)
+	ifneq ($(arch),i386)
 		CXXFLAGS += -flto
 		LDFLAGS += $(CXXFLAGS) -flto=jobserver
+	endif
 	endif
 	endif
 endif
@@ -729,7 +731,7 @@ install:
 	-cp $(EXE) $(BINDIR)
 	-strip $(BINDIR)/$(EXE)
 
-#clean all
+# clean all
 clean: objclean profileclean
 	@rm -f .depend *~ core
 
