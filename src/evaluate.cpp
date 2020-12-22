@@ -917,7 +917,7 @@ Value Eval::evaluate(const Position& pos) {
 std::string Eval::trace(const Position& pos) {
 
   if (pos.checkers())
-      return "Total evaluation: none (in check)";
+      return "Final evaluation: none (in check)";
 
   std::memset(scores, 0, sizeof(scores));
 
