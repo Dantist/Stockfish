@@ -1065,7 +1065,7 @@ moves_loop: // When in check, search starts from here
                      + PieceValue[MG][type_of(pos.piece_on(to_sq(move)))] <= alpha)
                   continue;
 
-              // See based pruning
+              // SEE based pruning
               if (!pos.see_ge(move, Value(-202) * depth)) // (~25 Elo)
                   continue;
           }
